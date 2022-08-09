@@ -12,7 +12,7 @@ const mainStyles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 33,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
   },
 
   heaging: {
@@ -27,7 +27,7 @@ const mainStyles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
   },
-
+  
   Button: {
     width: "100%",
     height: 90,
@@ -35,6 +35,13 @@ const mainStyles = StyleSheet.create({
     backgroundColor: "#FFD615",
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 10,
+
+    shadowOffset: { width: 5, height: 10 },
+    shadowOpacity: 15,
+    shadowRadius: 10,
+    shadowColor: "rgba(0, 0, 0, 0.15);",
+    elevation: 15,
 
     Text: {
       color: "#030303",
@@ -43,6 +50,12 @@ const mainStyles = StyleSheet.create({
       lineHeight: 33,
     },
   },
+
+  form: {
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+  }
 });
 
 export default mainStyles;

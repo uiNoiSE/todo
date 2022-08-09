@@ -10,11 +10,16 @@ export default function Intro(props) {
     <SafeAreaView style={mainStyles.mainContainer}>
       <StatusBar barStyle="dark-content" />
       <Decorations />
-      <View style={mainStyles.contentWrapper}>
+      <View style={[mainStyles.contentWrapper, { marginBottom: 71 }]}>
         <Text style={[mainStyles.heaging, { marginBottom: 19 }]}>
           Let’s get things done on time
         </Text>
-        <Text style={[mainStyles.sectionDescription, { marginBottom: 65 }]}>
+        <Text
+          style={[
+            mainStyles.sectionDescription,
+            { height: 90, marginBottom: 65 },
+          ]}
+        >
           {
             "Lorem ipsum dolor sit amet, consectetur\nadipiscing elit. Telluspraesent purus\ntincidunt ut cursus vitae. Nisl, vitae nulla\nlectus tortor, est a aliquam. Pretium netus"
           }

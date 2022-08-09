@@ -7,7 +7,7 @@ export default function Input(props) {
       underlineColorAndroid="transparent"
       returnKeyType="next"
       // onSubmitEditing={() => } for future "hop to next text field from KB press next"
-      style={style.button}
+      style={[style.button, props.marginBottom]}
       placeholder={props.placeholder}
     />
   );
@@ -17,6 +17,7 @@ const style = StyleSheet.create({
   button: {
     width: "100%",
     height: 49,
+    marginBottom: 26,
     paddingHorizontal: 29,
     backgroundColor: "#FFFFFF",
     borderRadius: 30,

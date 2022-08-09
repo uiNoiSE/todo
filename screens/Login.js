@@ -1,9 +1,18 @@
-import { StatusBar, SafeAreaView, View, Text, Pressable } from "react-native";
+import {
+  StatusBar,
+  SafeAreaView,
+  View,
+  Text,
+  Pressable,
+  KeyboardAvoidingView,
+  Keyboard,
+} from "react-native";
 import mainStyles from "../assets/styles/mainStyles";
 
 import CustomButton from "../components/CustomButton";
 import Input from "../components/Input";
 import Decorations from "../components/Decorations";
+import InlinePropose from "../components/InlinePropose";
 
 export default function Login(props) {
   return (
@@ -11,20 +20,39 @@ export default function Login(props) {
       <StatusBar barStyle="dark-content" />
       <Decorations />
       <View style={mainStyles.contentWrapper}>
-        <Text>Welcome Back!</Text>
-        <Input placeholder="Enter your email" />
-        <Input placeholder="Enter password" />
+        <Text style={[mainStyles.heaging, { marginBottom: 47 }]}>
+          Welcome Back!
+        </Text>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={mainStyles.form}
+          onPress={Keyboard.dismiss}
+        >
+          <Input placeholder="Enter your email" />
+          <Input
+            marginBottom={{ marginBottom: 0 }}
+            placeholder="Enter password"
+          />
+
+          <InlinePropose
+            navigation={props.navigation}
+            hopTo={"Sign Up"}
+            text={""}
+            linkText={"Forgot Password"}
+          />
+        </KeyboardAvoidingView>
+
         <CustomButton
           text={"Sign In"}
           navigation={props.navigation}
-          hopTo={"Intro"}
+          hopTo={"Todo"}
         />
-        <View>
-          <Text>Already have an account?</Text>
-          <Pressable onPress={() => props.navigation.navigate("Sign Up")}>
-            <Text>Sign Up</Text>
-          </Pressable>
-        </View>
+        <InlinePropose
+          navigation={props.navigation}
+          text={"Don’t have an account?"}
+          hopTo={"Sign Up"}
+          linkText={"Sign Up"}
+        />
       </View>
     </SafeAreaView>
   );

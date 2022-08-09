@@ -10,6 +10,7 @@ import {
 import Intro from "./screens/Intro";
 import SignUp from "./screens/SignUp";
 import Login from "./screens/Login";
+import Todo from "./screens/Todo";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -27,6 +28,7 @@ export default function App() {
       <Stack.Navigator
         screenOptions={{ headerMode: "float", headerShown: false }}
       >
+        <Stack.Screen name="Todo" component={Todo} />
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="Sign Up" component={SignUp} />
         <Stack.Screen name="Login" component={Login} />
