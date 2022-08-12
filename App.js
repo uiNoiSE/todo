@@ -9,7 +9,7 @@ import {
 
 import Intro from "./screens/Intro";
 import SignUp from "./screens/SignUp";
-import Login from "./screens/Login";
+import SignIn from "./screens/SignIn";
 import Todo from "./screens/Todo";
 
 export default function App() {
@@ -25,13 +25,11 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{ headerMode: "float", headerShown: false }}
-      >
-        <Stack.Screen name="Todo" component={Todo} />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="Sign Up" component={SignUp} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Sign In" component={SignIn} />
+        <Stack.Screen name="Todo" component={Todo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

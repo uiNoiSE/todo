@@ -1,23 +1,21 @@
 import { StyleSheet } from "react-native";
 
-const InlineProposeStyle = StyleSheet.create({
-  Wrapper: {
+export const InlineProposeStyles = StyleSheet.create({
+  wrapper: {
     display: "flex",
     flexDirection: "row",
     paddingVertical: 25,
   },
 
-  Text: {
+  text: {
     fontFamily: "Poppins_400Regular",
     fontSize: 14,
     lineHeight: 21,
     textAlign: "center",
   },
 
-  Link: {
+  link: {
     color: "#FFD615",
     fontFamily: "Poppins_700Bold",
   },
 });
-
-export default InlineProposeStyle;
