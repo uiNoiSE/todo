@@ -8,10 +8,10 @@ import {
 
 import { mainStyles as MS } from "../assets/styles/mainStyles";
 
-import CustomButton from "../components/CustomButton/CustomButton";
-import Decorations from "../components/Decorations/Decorations";
-import InlinePropose from "../components/InlinePropose/InlinePropose";
-import Input from "../components/Input/Input";
+import CustomButton from "../components/CustomButton";
+import Decorations from "../components/Decorations";
+import InlinePropose from "../components/InlinePropose";
+import Input from "../components/Input";
 
 export default function SignUp({ navigation }) {
   return (

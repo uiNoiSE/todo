@@ -4,8 +4,8 @@ import { SafeAreaView, StatusBar, View, Text } from "react-native";
 import { mainStyles as MS } from "../assets/styles/mainStyles";
 import IntroImage from "../assets/svg/intro";
 
-import CustomButton from "../components/CustomButton/CustomButton";
-import Decorations from "../components/Decorations/Decorations";
+import CustomButton from "../components/CustomButton";
+import Decorations from "../components/Decorations";
 
 export default function Intro({ navigation }) {
   return (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, FlatList } from "react-native";
 
-import CustomModal from "../CustomModal/CustomModal";
-import CheckBox from "../Checkbox/Checkbox";
+import CustomModal from "../CustomModal";
+import CheckBox from "../Checkbox";
 
 import { TasklistStyles as TLS } from "./TasklistStyles";
 import { mainStyles as MS } from "../../assets/styles/mainStyles";

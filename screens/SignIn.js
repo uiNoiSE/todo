@@ -10,10 +10,10 @@ import {
 import { mainStyles as MS } from "../assets/styles/mainStyles";
 import LoginImage from "../assets/svg/login";
 
-import InlinePropose from "../components/InlinePropose/InlinePropose";
-import CustomButton from "../components/CustomButton/CustomButton";
-import Decorations from "../components/Decorations/Decorations";
-import Input from "../components/Input/Input";
+import InlinePropose from "../components/InlinePropose";
+import CustomButton from "../components/CustomButton";
+import Decorations from "../components/Decorations";
+import Input from "../components/Input";
 
 export default function SignIn({ navigation }) {
   return (

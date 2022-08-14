@@ -7,7 +7,7 @@ export const DecorationsStyles = StyleSheet.create({
     width: 173,
     height: 173,
 
-    borderRadius: "100%",
+    borderRadius: 173,
     backgroundColor: "rgba(255, 214, 21, 0.47)",
   },
 

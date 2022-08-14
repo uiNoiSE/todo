@@ -12,9 +12,9 @@ import { mainStyles as MS } from "../assets/styles/mainStyles";
 import { TodoStyles as TS } from "../assets/styles/TodoStyles";
 import LogOutButton from "../assets/svg/logOutButton";
 
-import Decorations from "../components/Decorations/Decorations";
-import Tasklist from "../components/Tasklist/Tasklist";
-import Clock from "../components/Clock/Clock";
+import Decorations from "../components/Decorations";
+import Tasklist from "../components/Tasklist";
+import Clock from "../components/Clock";
 
 export default function Todo({ navigation }) {
   return (
