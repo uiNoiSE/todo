@@ -8,5 +8,25 @@ export const InputStyles = StyleSheet.create({
     paddingHorizontal: 29,
     backgroundColor: "#FFFFFF",
     borderRadius: 30,
+    overflow: "hidden",
+  },
+
+  wrapper: {
+    width: "100%",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+  },
+
+  errorInput: {
+    borderColor: "red",
+    borderWidth: 2,
+  },
+
+  errorText: {
+    position: "absolute",
+    bottom: 14,
+    fontSize: 10,
+    color: "red",
   },
 });

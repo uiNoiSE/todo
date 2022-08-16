@@ -11,7 +11,7 @@ import { mainStyles as MS } from "../../assets/styles/mainStyles";
 import { CustomModal as CM } from "./CustomModalStyles";
 
 import CustomButton from "../CustomButton/CustomButton";
-import Input from "../Input/Input";
+import ModalInput from "./ModalInput";
 
 export default function CustomModal({ modalVisible, setModalVisible }) {
   return (
@@ -25,10 +25,12 @@ export default function CustomModal({ modalVisible, setModalVisible }) {
           <View style={CM.wrapper}>
             <TouchableWithoutFeedback activeOpacity={1}>
               <View style={CM.contentWrapper}>
-                <Text style={[MS.heading, MS.heading__Modal]}>
-                  Add new task
-                </Text>
-                <Input af={true} placeholder="Add your task here" />
+                <Text style={[MS.heading, MS.heading_Modal]}>Add new task</Text>
+                <ModalInput
+                  af={true}
+                  placeholder="Add your task here"
+                  onChangeText={() => console.log("Modal input")}
+                />
                 <CustomButton
                   text={"Submit"}
                   f={() => setModalVisible(!modalVisible)}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, FlatList } from "react-native";
 
 import CustomModal from "../CustomModal";
@@ -8,9 +8,14 @@ import { TasklistStyles as TLS } from "./TasklistStyles";
 import { mainStyles as MS } from "../../assets/styles/mainStyles";
 import AddTaskButton from "../../assets/svg/addTaskButton";
 
-export default function Tasklist() {
+import { cache } from "../../store";
+
+export default function Tasklist({ todosSync }) {
+  const [todos, setTodos] = useState(todosSync);
   const [modalVisible, setModalVisible] = useState(false);
-  const renderItem = ({ item }) => <CheckBox item={item} />;
+  const renderItem = ({ item }) => {
+    return <CheckBox item={item} />;
+  };
 
   return (
     <View style={TLS.wrapper}>
@@ -25,7 +30,7 @@ export default function Tasklist() {
         </Pressable>
       </View>
       <FlatList
-        data={DATA}
+        data={todos}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />

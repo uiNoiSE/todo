@@ -62,6 +62,7 @@ export const mainStyles = StyleSheet.create({
   Button: {
     width: "100%",
     height: 90,
+    marginBottom: 25,
 
     backgroundColor: "#FFD615",
     alignItems: "center",

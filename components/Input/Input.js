@@ -1,16 +1,35 @@
-import { TextInput } from "react-native";
+import { Text, TextInput, View } from "react-native";
 import { InputStyles as IS } from "./InputStyles";
 
-export default function Input({ marginBottom, placeholder, af }) {
+const Input = (props) => {
+  const {
+    field: { name, onBlur, onChange, value, returnKeyType },
+    form: { errors, touched, setFieldTouched },
+    ...inputProps
+  } = props;
+
+  const hasError = errors[name] && touched[name];
+
   return (
-    <TextInput
-      placeholderTextColor="#000"
-      underlineColorAndroid="transparent"
-      returnKeyType="next"
-      // onSubmitEditing={() => } for future "hop to next text field from KB press next"
-      style={[IS.textfield, marginBottom]}
-      placeholder={placeholder}
-      autoFocus={af}
-    />
+    <View style={IS.wrapper}>
+      <TextInput
+        placeholderTextColor="#000"
+        underlineColorAndroid="transparent"
+        style={[IS.textfield, hasError && IS.errorInput]}
+        returnKeyType={returnKeyType}
+        value={value}
+        onChangeText={(text) => onChange(name)(text)}
+        onBlur={() => {
+          setFieldTouched(name);
+          onBlur(name);
+        }}
+        {...inputProps}
+      />
+      {hasError && touched[name] && (
+        <Text style={IS.errorText}>{errors[name]}</Text>
+      )}
+    </View>
   );
-}
+};
+
+export default Input;

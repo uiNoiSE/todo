@@ -16,7 +16,15 @@ import Decorations from "../components/Decorations";
 import Tasklist from "../components/Tasklist";
 import Clock from "../components/Clock";
 
-export default function Todo({ navigation }) {
+export default function Todo({
+  navigation,
+  route: {
+    params: {
+      userData: { userName, todos },
+    },
+  },
+}) {
+  console.log(todos);
   return (
     <SafeAreaView style={[MS.mainContainer, MS.mainContainer_Todo]}>
       <StatusBar barStyle="dark-content" />
@@ -40,13 +48,13 @@ export default function Todo({ navigation }) {
               source={require("../assets/img/user.jpg")}
             />
           </View>
-          <Text style={MS.heading}>Welcome Anand!</Text>
+          <Text style={MS.heading}>Welcome {userName}!</Text>
         </View>
 
         <View style={TS.contentWrapper}>
           <Clock />
           <Text style={TS.title}>Tasks List</Text>
-          <Tasklist />
+          <Tasklist todos={todos}/>
         </View>
       </View>
     </SafeAreaView>

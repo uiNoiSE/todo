@@ -4,7 +4,7 @@ export const InlineProposeStyles = StyleSheet.create({
   wrapper: {
     display: "flex",
     flexDirection: "row",
-    paddingVertical: 25,
+    paddingBottom: 25,
   },
 
   text: {
