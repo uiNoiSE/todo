@@ -9,3 +9,12 @@ export const cache = new Cache({
   },
   backend: AsyncStorage,
 });
+
+export const currentUser = new Cache({
+  namespace: "currentUser",
+  policy: {
+    maxEntries: 50,
+    stdTTL: 0,
+  },
+  backend: AsyncStorage,
+});

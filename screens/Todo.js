@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   StatusBar,
@@ -7,6 +7,8 @@ import {
   Pressable,
   Image,
 } from "react-native";
+import { currentUser, cache } from "../store";
+import { observer } from "mobx-react-lite";
 
 import { mainStyles as MS } from "../assets/styles/mainStyles";
 import { TodoStyles as TS } from "../assets/styles/TodoStyles";
@@ -15,16 +17,37 @@ import LogOutButton from "../assets/svg/logOutButton";
 import Decorations from "../components/Decorations";
 import Tasklist from "../components/Tasklist";
 import Clock from "../components/Clock";
+import loginStatus from "../store/loginStatus";
 
-export default function Todo({
-  navigation,
-  route: {
-    params: {
-      userData: { userName, todos },
-    },
-  },
-}) {
-  console.log(todos);
+const Todo = () => {
+  const [currentUserName, setCurrentUserName] = useState("");
+
+  const logOut = async () => {
+    try {
+      loginStatus.signOut();
+      await currentUser.clearAll();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const getUserName = async () => {
+      try {
+        const userData = await currentUser.get("currently logged");
+        const userEmail = JSON.parse(userData).email;
+        const res = await cache.get(userEmail);
+        const userName = JSON.parse(res).userName;
+        if (userName) {
+          setCurrentUserName(userName);
+        } else return;
+      } catch (e) {
+        console.warn(e);
+      }
+    };
+    getUserName();
+  }, []);
+
   return (
     <SafeAreaView style={[MS.mainContainer, MS.mainContainer_Todo]}>
       <StatusBar barStyle="dark-content" />
@@ -36,7 +59,7 @@ export default function Todo({
             <Pressable
               style={TS.signOutWrapper__button}
               hitSlop={18}
-              onPress={() => navigation.navigate("Sign In")}
+              onPress={() => logOut()}
             >
               <LogOutButton />
             </Pressable>
@@ -48,15 +71,17 @@ export default function Todo({
               source={require("../assets/img/user.jpg")}
             />
           </View>
-          <Text style={MS.heading}>Welcome {userName}!</Text>
+          <Text style={MS.heading}>Welcome {currentUserName}!</Text>
         </View>
 
         <View style={TS.contentWrapper}>
           <Clock />
           <Text style={TS.title}>Tasks List</Text>
-          <Tasklist todos={todos}/>
+          <Tasklist />
         </View>
       </View>
     </SafeAreaView>
   );
-}
+};
+
+export default observer(Todo);

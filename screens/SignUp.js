@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
-import { cache } from "../store";
+import { cache, currentUser } from "../store";
 
 import { mainStyles as MS } from "../assets/styles/mainStyles";
 
@@ -41,12 +41,7 @@ export default function SignUp({ navigation }) {
     try {
       const jsonValue = JSON.stringify({ userName, email, passwd, todos });
       await cache.set(email, jsonValue);
-      console.log("set success || payload for", `${email}: `, {
-        userName,
-        email,
-        passwd,
-        todos,
-      });
+
       Keyboard.dismiss();
       navigation.navigate("Sign In");
     } catch (e) {

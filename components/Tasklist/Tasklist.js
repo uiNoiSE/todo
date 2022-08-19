@@ -4,22 +4,78 @@ import { View, Text, Pressable, FlatList } from "react-native";
 import CustomModal from "../CustomModal";
 import CheckBox from "../Checkbox";
 
+import { cache, currentUser } from "../../store";
+
 import { TasklistStyles as TLS } from "./TasklistStyles";
 import { mainStyles as MS } from "../../assets/styles/mainStyles";
 import AddTaskButton from "../../assets/svg/addTaskButton";
 
-import { cache } from "../../store";
+export default function Tasklist() {
+  const [userEmail, setUserEmail] = useState();
+  const [todos, setTodos] = useState([]);
 
-export default function Tasklist({ todosSync }) {
-  const [todos, setTodos] = useState(todosSync);
+  const toggleCheckbox = (itemID) => {
+    const updatedTask = todos.map((task) => {
+      if (itemID === task.id) {
+        task.checked = !task.checked;
+      }
+      return task;
+    });
+
+    setTodos(() => updatedTask);
+  };
+
+  const [newTodo, setNewTodo] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
   const renderItem = ({ item }) => {
-    return <CheckBox item={item} />;
+    return <CheckBox onPress={toggleCheckbox} item={item} />;
   };
+
+  const getData = async () => {
+    try {
+      const res = await currentUser.get("currently logged");
+      const parsedRes = JSON.parse(res);
+      const userData = await cache.get(parsedRes.email);
+      const parsedUserData = JSON.parse(userData);
+      if (res && userData) {
+        setUserEmail(parsedRes.email);
+        setTodos(parsedUserData.todos);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateSyncedTodo = async () => {
+    try {
+      const userData = await cache.get(userEmail);
+      const parsedUserData = JSON.parse(userData);
+
+      if (parsedUserData) {
+        const resSynced = { ...parsedUserData, todos };
+        await cache.set(userEmail, JSON.stringify(resSynced));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    if (userEmail) {
+      updateSyncedTodo();
+    }
+  }, [todos]);
 
   return (
     <View style={TLS.wrapper}>
       <CustomModal
+        setTodos={setTodos}
+        newTodo={newTodo}
+        setNewTodo={setNewTodo}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
@@ -37,36 +93,3 @@ export default function Tasklist({ todosSync }) {
     </View>
   );
 }
-
-let DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "1 Item",
-    checked: false,
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "2 Item",
-    checked: true,
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "3 Item",
-    checked: true,
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28gfdgba",
-    title: "4 Item",
-    checked: false,
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aathgfh97f63",
-    title: "5 Item",
-    checked: false,
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-1455jfgjf71e29d72",
-    title: "6 Item",
-    checked: true,
-  },
-];

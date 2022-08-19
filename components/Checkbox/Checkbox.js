@@ -3,7 +3,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 import { CheckboxStyles as CBS } from "./CheckboxStyles";
 
-export default function CheckBox({ item: { title, checked } }) {
+export default function CheckBox({ item: { id, title, checked }, onPress }) {
   const [checkboxState, setCheckboxState] = useState(checked);
 
   return (
@@ -11,7 +11,12 @@ export default function CheckBox({ item: { title, checked } }) {
       disableBuiltInState={true}
       text={title}
       isChecked={checkboxState}
-      onPress={() => setCheckboxState((checkboxState) => !checkboxState)}
+      onPress={() => {
+        onPress(id);
+        setCheckboxState((checkboxState) => !checkboxState);
+      }}
+      // () => {
+      //  }
       size={18}
       style={CBS.itemContainer}
       iconStyle={CBS.iconOuter}

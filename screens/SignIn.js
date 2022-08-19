@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
-import { cache } from "../store";
+import { v4 as uuidv4 } from "uuid";
+import { cache, currentUser } from "../store";
 
 import { mainStyles as MS } from "../assets/styles/mainStyles";
 import LoginImage from "../assets/svg/login";
@@ -18,18 +19,21 @@ import InlinePropose from "../components/InlinePropose";
 import CustomButton from "../components/CustomButton";
 import Decorations from "../components/Decorations";
 import Input from "../components/Input";
+import loginStatus from "../store/loginStatus";
+import { observer } from "mobx-react-lite";
 
-export default function SignIn({ navigation }) {
+const SignIn = ({ navigation }) => {
   const getData = async ({ email, passwd }) => {
     try {
       let userData = await cache.get(email);
-      console.log("userData:", userData);
-      console.log("email:", email);
+
       if (userData) {
         userData = JSON.parse(userData);
         if (passwd == userData.passwd) {
+          const currentlyLogged = JSON.stringify({ email, token: uuidv4() });
+          await currentUser.set("currently logged", currentlyLogged);
           Keyboard.dismiss();
-          navigation.navigate("Todo", { userData });
+          loginStatus.signIn();
           return userData;
         } else {
           Alert.alert("Error", "Invalid details");
@@ -38,6 +42,7 @@ export default function SignIn({ navigation }) {
         Alert.alert("Error", "User does not exist");
       }
     } catch (error) {
+      console.log(error);
       Alert.alert("Error", "Unexpected error");
     }
   };
@@ -67,7 +72,7 @@ export default function SignIn({ navigation }) {
           }}
           onSubmit={(values) => getData(values)}
         >
-          {({ handleSubmit, isValid, userData }) => (
+          {({ handleSubmit, isValid }) => (
             <KeyboardAvoidingView
               behavior={Platform.OS === "ios" ? "padding" : "height"}
               style={MS.form}
@@ -112,4 +117,6 @@ export default function SignIn({ navigation }) {
       </View>
     </SafeAreaView>
   );
-}
+};
+
+export default observer(SignIn);

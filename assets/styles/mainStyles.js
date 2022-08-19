@@ -19,7 +19,7 @@ export const mainStyles = StyleSheet.create({
     justifyContent: "flex-end",
   },
 
-  wrapper_Intro: { marginBottom: 71 },
+  wrapper_Intro: { marginBottom: 46 },
 
   heading: {
     fontFamily: "Poppins_500Medium",
