@@ -6,6 +6,7 @@ import {
   Text,
   Keyboard,
   KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
@@ -51,8 +52,14 @@ export default function SignUp({ navigation }) {
 
   return (
     <SafeAreaView style={MS.mainContainer}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar
+        translucent
+        barStyle="dark-content"
+        backgroundColor="transparent"
+      />
+
       <Decorations />
+
       <View style={MS.wrapper}>
         <Text style={[MS.heading, MS.heading_SignUp]}>Welcome Onboard!</Text>
         <Text style={(MS.description, MS.description_SignUp)}>
@@ -70,50 +77,53 @@ export default function SignUp({ navigation }) {
           onSubmit={(values) => saveNewUser(values)}
         >
           {({ handleSubmit, isValid }) => (
-            <KeyboardAvoidingView
-              behavior={Platform.OS === "ios" ? "padding" : "height"}
-              style={MS.form}
-            >
-              <Field
-                component={Input}
-                name="userName"
-                placeholder="Enter your full name"
-                returnKeyType="next"
-                textContentType={"givenName"}
-              />
+            <>
+              <KeyboardAvoidingView
+                behavior={"padding"}
+                keyboardVerticalOffset={25}
+                style={MS.form}
+              >
+                <Field
+                  component={Input}
+                  name="userName"
+                  placeholder="Enter your full name"
+                  returnKeyType="next"
+                  textContentType={"givenName"}
+                />
 
-              <Field
-                component={Input}
-                name="email"
-                placeholder="Email Address"
-                keyboardType="email-address"
-                returnKeyType="next"
-                textContentType={"emailAddress"}
-              />
+                <Field
+                  component={Input}
+                  name="email"
+                  placeholder="Email Address"
+                  keyboardType="email-address"
+                  returnKeyType="next"
+                  textContentType={"emailAddress"}
+                />
 
-              <Field
-                component={Input}
-                name="passwd"
-                placeholder="Enter password"
-                returnKeyType="next"
-                textContentType={"newPassword"}
-                secureTextEntry
-              />
+                <Field
+                  component={Input}
+                  name="passwd"
+                  placeholder="Enter password"
+                  returnKeyType="next"
+                  textContentType={"newPassword"}
+                  secureTextEntry
+                />
 
-              <Field
-                component={Input}
-                name="confirmPasswd"
-                placeholder="Confirm password"
-                returnKeyType="done"
-                textContentType="none"
-                secureTextEntry
-              />
+                <Field
+                  component={Input}
+                  name="confirmPasswd"
+                  placeholder="Confirm password"
+                  returnKeyType="done"
+                  textContentType={"password"}
+                  secureTextEntry
+                />
+              </KeyboardAvoidingView>
               <CustomButton
                 f={handleSubmit}
                 text={"Register"}
                 disabled={!isValid}
               />
-            </KeyboardAvoidingView>
+            </>
           )}
         </Formik>
         <InlinePropose

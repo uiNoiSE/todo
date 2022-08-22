@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 
 export const mainStyles = StyleSheet.create({
   mainContainer: {
@@ -6,6 +6,7 @@ export const mainStyles = StyleSheet.create({
     position: "relative",
     flex: 1,
     backgroundColor: "#F5F5F5",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 
   mainContainer_Todo: {

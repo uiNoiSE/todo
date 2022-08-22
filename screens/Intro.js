@@ -10,7 +10,7 @@ import Decorations from "../components/Decorations";
 export default function Intro({ navigation }) {
   return (
     <SafeAreaView style={MS.mainContainer}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar translucent barStyle="dark-content" backgroundColor="transparent" />
       <Decorations />
       <View style={[MS.wrapper, MS.wrapper_Intro]}>
         <IntroImage style={{ marginBottom: 42 }} />

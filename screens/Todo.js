@@ -50,7 +50,11 @@ const Todo = () => {
 
   return (
     <SafeAreaView style={[MS.mainContainer, MS.mainContainer_Todo]}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar
+        translucent
+        barStyle="dark-content"
+        backgroundColor="transparent"
+      />
       <Decorations color={{ backgroundColor: "rgba(255, 252, 238, 0.47)" }} />
 
       <View style={TS.wrapper}>

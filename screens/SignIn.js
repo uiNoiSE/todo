@@ -58,7 +58,11 @@ const SignIn = ({ navigation }) => {
   });
   return (
     <SafeAreaView style={MS.mainContainer}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar
+        translucent
+        barStyle="dark-content"
+        backgroundColor="transparent"
+      />
       <Decorations />
       <View style={MS.wrapper}>
         <Text style={[MS.heading, MS.heading_SignIn]}>Welcome Back!</Text>
@@ -73,27 +77,30 @@ const SignIn = ({ navigation }) => {
           onSubmit={(values) => getData(values)}
         >
           {({ handleSubmit, isValid }) => (
-            <KeyboardAvoidingView
-              behavior={Platform.OS === "ios" ? "padding" : "height"}
-              style={MS.form}
-            >
-              <Field
-                component={Input}
-                name="email"
-                placeholder="Email Address"
-                keyboardType="email-address"
-                returnKeyType="next"
-                textContentType={"emailAddress"}
-              />
+            <>
+              <KeyboardAvoidingView
+                behavior={"padding"}
+                keyboardVerticalOffset={25}
+                style={MS.form}
+              >
+                <Field
+                  component={Input}
+                  name="email"
+                  placeholder="Email Address"
+                  keyboardType="email-address"
+                  returnKeyType="next"
+                  textContentType={"emailAddress"}
+                />
 
-              <Field
-                component={Input}
-                name="passwd"
-                placeholder="Enter password"
-                returnKeyType="next"
-                textContentType={"password"}
-                secureTextEntry
-              />
+                <Field
+                  component={Input}
+                  name="passwd"
+                  placeholder="Enter password"
+                  returnKeyType="next"
+                  textContentType={"password"}
+                  secureTextEntry
+                />
+              </KeyboardAvoidingView>
 
               <InlinePropose
                 f={() => navigation.navigate("Sign Up")}
@@ -111,7 +118,7 @@ const SignIn = ({ navigation }) => {
                 text={"Don’t have an account?"}
                 linkText={"Sign Up"}
               />
-            </KeyboardAvoidingView>
+            </>
           )}
         </Formik>
       </View>
